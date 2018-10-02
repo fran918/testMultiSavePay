@@ -6,7 +6,25 @@ body {
     padding: 90px 15px;
 }
 
+.ritem:hover{
+    transform: scale(1.03);
+    background: #f9f9f9;
+}
+.ritem{
+    transition: transform .2s;
+}
 
+.name{
+    float: none;
+    width: 100%;
+    overflow: hidden;
+}
+.weight{
+    color: gray;
+    text-align: right;
+    font-size: 10px;
+    float: left !important;
+}
 .header-top {
     box-shadow: 0 3px 5px rgba(0, 0, 0, .1)
 }

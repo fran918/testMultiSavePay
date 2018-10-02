@@ -19,7 +19,7 @@ class DataController extends Controller
             <site_secure_code>970443</site_secure_code>
             </merchant>
             <transaction>
-            <id>fcupen_1</id>
+            <id>fcupen_2</id>
             </transaction>
             </status>';
             $URL = "https://devapi.multisafepay.com/ewx/?wsdl";
@@ -36,10 +36,9 @@ class DataController extends Controller
             
             $xml = new \SimpleXMLElement($response);
             $array = json_decode(json_encode($xml),true);
-         var_dump($array);   
-        if(empty($array) === false){
-         return '$array';
-            /*return [
+       
+            if(empty($array) === false){
+return [
                 "status"=>'true',
                 "ewallet"=>$array['ewallet'],
                 "customer"=>$array['customer'],
@@ -49,7 +48,8 @@ class DataController extends Controller
                 "checkoutdata"=>$array['checkoutdata'],
                 "items"=>$array['checkoutdata']["shopping-cart"]["items"]
             ];
-        */}else{
+
+        }else{
             return [
                 "status"=>'false'
             ];

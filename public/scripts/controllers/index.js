@@ -10,8 +10,7 @@ angular.module('Client')
 			success(function (data, status, headers, config) {
 				if(data.status === 'true'){
 				$scope.data = data;
-				console.log(data.items);
-				console.log(data.items);
+				$scope.sumTotal(data.items.item);
 			}else{
 				console.log("false");
 			}
@@ -19,8 +18,11 @@ angular.module('Client')
 			error(function (data, status, headers, config) {
 				console.error(data, status, headers, config );
 			});
-		$scope.sumTotal = function(sub){
-			$scope.total += sub;
-			return sub;
+		$scope.sumTotal = function(data){
+			let sum = 0;
+			data.map((item)=>{
+				sum += item['quantity'] * item['unit-price']
+			});
+			$scope.total += sum;
 		}
 	})

@@ -1,47 +1,63 @@
-
-  <div id="wrapper" class="animate">
-    <nav class="navbar header-top fixed-top navbar-expand-lg  navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Test MultiSavePay</a>
-    </nav>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Items</h5>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Unit Price</th>
-                    <th scope="col">Qty</th>
-                    <th scope="col">SubTotal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="item in data.items.item">
-                    <th scope="row">{{item}}</th>
-                    <td>{{item['item-name']}}</td>
-                    <td>{{item['item-description']}}</td>
-                    <td>{{item['unit-price']}}</td>
-                    <td>{{item['quantity']}}</td>
-                    <td>€ {{sumTotal(item['tax-table-selector'])}}</td>
-                  </tr>
-                  <tr ng-show="total > 0">
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Total</td>
-                    <td>€ {{total}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+<div id="wrapper" class="animate">
+  <nav class="navbar header-top fixed-top navbar-expand-lg  navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Test MultiSavePay</a>
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Items</h5>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Unit Price</th>
+                  <th scope="col">Qty</th>
+                  <th scope="col">SubTotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="ritem" ng-repeat="item in data.items.item">
+                  <th scope="row">
+                    <span ng-show="item['merchant-item-id'] > 0">
+                      {{item['merchant-item-id']}}
+                    </span>
+                  </th>
+                  <td>
+                    <span class="name">
+                      {{item['item-name']}}
+                    </span>
+                    <span class="name weight" ng-show="item['item-weight']['@attributes'].value > 0">
+                      weight: {{item['item-weight']['@attributes'].value + item['item-weight']['@attributes'].unit |
+                      lowercase}}
+                    </span>
+                  </td>
+                  <td ng-show="item['item-description'].length">
+                    {{item['item-description']}}
+                  </td>
+                  <td ng-hide="item['item-description'].length">
+                    There isn't description.
+                  </td>
+                  <td>{{item['unit-price']}}</td>
+                  <td>{{item['quantity']}}</td>
+                  <td>€ {{item['quantity'] * item['unit-price']}}</td>
+                </tr>
+                <tr ng-show="total > 0">
+                  <th scope="row"></th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>Total</td>
+                  <td>€ {{total}}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
